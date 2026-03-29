@@ -1,0 +1,40 @@
+<section class="inventory-page">
+    <div class="inventory-panel-full">
+        <div class="panel-header">
+            <h2 class="panel-title">◈ ИНВЕНТАРЬ СТРАННИКА</h2>
+            <span class="panel-id">{{#if hasInventory}}ОБЪЕКТОВ: {{inventoryCount}}{{else}}ПУСТО{{/if}}</span>
+        </div>
+        <div class="panel-body">
+            {{#if hasInventory}}
+            <div class="inventory-grid" id="inventory-grid">
+                {{#each inventory}}
+                <div class="inventory-item">
+                    <div class="item-preview">
+                        {{#if (isImage this.mimeType)}}
+                        <img src="{{this.url}}" alt="{{this.name}}" loading="lazy">
+                        {{else}}
+                        <span class="item-icon">📦</span>
+                        {{/if}}
+                    </div>
+                    <div class="item-info">
+                        <span class="item-name" title="{{this.name}}">{{this.name}}</span>
+                        <span class="item-size">{{formatSize this.size}}</span>
+                    </div>
+                    <div class="item-actions">
+                        <a href="/api/download/{{this.id}}" class="item-action-btn" title="Скачать">
+                            ⬇ Скачать
+                        </a>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+            {{else}}
+            <div class="inventory-empty">
+                <p class="empty-icon">🛸</p>
+                <p class="empty-text">Ваш инвентарь пуст.</p>
+                <p class="empty-subtext">Вернитесь в <a href="/">грузовой шлюз</a> и обменяйте артефакт.</p>
+            </div>
+            {{/if}}
+        </div>
+    </div>
+</section>

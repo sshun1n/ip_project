@@ -1,0 +1,34 @@
+<section class="auth-page">
+    <div class="auth-panel">
+        <div class="panel-header">
+            <h2 class="panel-title">◈ РЕГИСТРАЦИЯ СТРАННИКА</h2>
+            <span class="panel-id">NEW-CREW</span>
+        </div>
+        <div class="panel-body">
+            <p class="auth-subtitle">Зарегистрируйтесь, чтобы получить доступ к грузовому шлюзу.</p>
+            <form method="POST" action="/register" class="auth-form">
+                <div class="form-group">
+                    <label for="username" class="form-label">Позывной</label>
+                    <input type="text" id="username" name="username" class="form-input" placeholder="Выберите позывной..." required autofocus minlength="2" maxlength="24" autocomplete="username">
+                    <span class="form-hint">От 2 до 24 символов</span>
+                </div>
+                <div class="form-group">
+                    <label for="password" class="form-label">Код доступа</label>
+                    <input type="password" id="password" name="password" class="form-input" placeholder="Минимум 4 символа" required minlength="4" autocomplete="new-password">
+                </div>
+                <div class="form-group">
+                    <label for="passwordConfirm" class="form-label">Подтвердите код</label>
+                    <input type="password" id="passwordConfirm" name="passwordConfirm" class="form-input" placeholder="Повторите код доступа" required minlength="4" autocomplete="new-password">
+                </div>
+                <button type="submit" class="cargo-btn auth-submit">
+                    <span class="btn-icon">◈</span>
+                    <span class="btn-text">ЗАРЕГИСТРИРОВАТЬСЯ</span>
+                </button>
+            </form>
+            <div class="auth-switch">
+                <span>Уже есть позывной?</span>
+                <a href="/login">Войти на станцию</a>
+            </div>
+        </div>
+    </div>
+</section>

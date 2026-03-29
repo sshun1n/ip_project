@@ -1,0 +1,25 @@
+{
+  "name": "digital-trade-in-artifact-swap",
+  "version": "1.0.0",
+  "description": "Anonymous digital artifact exchange platform — Cosmic Punk style",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "node --watch app.js",
+    "test": "jest --verbose"
+  },
+  "keywords": ["trade-in", "artifacts", "cosmic", "express"],
+  "license": "MIT",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.2",
+    "cookie-parser": "^1.4.6",
+    "express": "^4.18.2",
+    "express-handlebars": "^7.1.2",
+    "express-session": "^1.17.3",
+    "multiparty": "^4.2.3"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}

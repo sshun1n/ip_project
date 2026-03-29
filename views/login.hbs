@@ -1,0 +1,29 @@
+<section class="auth-page">
+    <div class="auth-panel">
+        <div class="panel-header">
+            <h2 class="panel-title">◈ ИДЕНТИФИКАЦИЯ</h2>
+            <span class="panel-id">AUTH-GATE</span>
+        </div>
+        <div class="panel-body">
+            <p class="auth-subtitle">Войдите на станцию, чтобы начать обмен артефактами.</p>
+            <form method="POST" action="/login" class="auth-form">
+                <div class="form-group">
+                    <label for="username" class="form-label">Позывной</label>
+                    <input type="text" id="username" name="username" class="form-input" placeholder="Ваш позывной..." required autofocus autocomplete="username">
+                </div>
+                <div class="form-group">
+                    <label for="password" class="form-label">Код доступа</label>
+                    <input type="password" id="password" name="password" class="form-input" placeholder="••••••" required autocomplete="current-password">
+                </div>
+                <button type="submit" class="cargo-btn auth-submit">
+                    <span class="btn-icon">⚡</span>
+                    <span class="btn-text">ВОЙТИ НА СТАНЦИЮ</span>
+                </button>
+            </form>
+            <div class="auth-switch">
+                <span>Впервые на станции?</span>
+                <a href="/register">Зарегистрироваться</a>
+            </div>
+        </div>
+    </div>
+</section>

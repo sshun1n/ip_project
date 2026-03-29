@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Digital Trade-In: Artifact Swap — анонимная станция обмена космическими артефактами.">
+    <title>⚡ Artifact Swap — Станция Обмена</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <!-- Star field background -->
+    <div class="starfield">
+        <div class="stars stars-small"></div>
+        <div class="stars stars-medium"></div>
+        <div class="stars stars-large"></div>
+    </div>
+
+    <!-- Scanline overlay -->
+    <div class="scanline-overlay"></div>
+
+    <!-- Header -->
+    <header class="station-header">
+        <div class="header-content">
+            <a href="/" class="station-logo-link">
+                <div class="station-logo">
+                    <span class="logo-icon">◈</span>
+                    <h1>ARTIFACT SWAP</h1>
+                </div>
+                <span class="station-subtitle">СТАНЦИЯ ОБМЕНА · СЕКТОР 7G</span>
+            </a>
+
+            <nav class="header-nav">
+                {{#if isAuthenticated}}
+                <a href="/inventory" class="nav-item nav-inventory" id="nav-inventory" title="Инвентарь">
+                    <span class="nav-icon">🎒</span>
+                    <span class="nav-label">Инвентарь</span>
+                    <span class="inventory-badge" id="inventory-badge">{{user.inventory.length}}</span>
+                </a>
+                <span class="nav-item nav-username">
+                    <span class="nav-icon">◈</span>
+                    <span class="nav-label">{{user.username}}</span>
+                </span>
+                <a href="/logout" class="nav-item nav-logout-btn" title="Выйти">⏻</a>
+                {{else}}
+                <a href="/login" class="nav-item nav-auth-btn">Вход</a>
+                <a href="/register" class="nav-item nav-auth-btn nav-register">Регистрация</a>
+                {{/if}}
+            </nav>
+        </div>
+    </header>
+
+    <!-- Flash messages -->
+    {{#if flash.length}}
+    <div class="flash-container">
+        {{#each flash}}
+        <div class="flash-signal flash-{{this.type}}" data-flash-id="{{this.id}}">
+            <span class="flash-icon">
+                {{#if (eq this.type "signal")}}⚡{{/if}}
+                {{#if (eq this.type "warning")}}⚠{{/if}}
+                {{#if (eq this.type "static")}}📡{{/if}}
+            </span>
+            <span class="flash-text">{{this.message}}</span>
+            <button class="flash-dismiss" onclick="this.parentElement.remove()">✕</button>
+        </div>
+        {{/each}}
+    </div>
+    {{/if}}
+
+    <!-- Dynamic flash container -->
+    <div id="dynamic-flash" class="flash-container"></div>
+
+    <!-- Main content -->
+    <main class="station-main">
+        {{{body}}}
+    </main>
+
+    <!-- Footer -->
+    <footer class="station-footer">
+        <div class="footer-content">
+            <span class="footer-coords">◈ КООРДИНАТЫ: 47.3°N · 122.0°W · ОРБИТА Z-93</span>
+            <span class="footer-signal">СИГНАЛ СТАБИЛЕН ████████░░ 82%</span>
+        </div>
+    </footer>
+
+    <script src="/js/client.js"></script>
+</body>
+
+</html>

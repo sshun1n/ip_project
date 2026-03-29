@@ -1,0 +1,122 @@
+<!-- ═══════════════════════════════════════════════ -->
+<!-- CENTERED CARGO AIRLOCK                         -->
+<!-- ═══════════════════════════════════════════════ -->
+<section class="airlock-fullscreen">
+    <!-- Background airlock illustration -->
+    <div class="airlock-bg-art">
+        <img src="/images/airlock-bg.png" alt="" class="airlock-bg-img" aria-hidden="true">
+    </div>
+
+    <div class="airlock-panel-centered">
+        <div class="panel-header">
+            <div class="panel-decorators">
+                <span class="decorator-dot red"></span>
+                <span class="decorator-dot yellow"></span>
+                <span class="decorator-dot green"></span>
+            </div>
+            <h2 class="panel-title">◈ ГРУЗОВОЙ ШЛЮЗ</h2>
+            <span class="panel-id">AIRLOCK-07</span>
+        </div>
+
+        <div class="panel-body">
+            <!-- PHASE 1: Upload Zone -->
+            <div class="trade-phase" id="phase-upload">
+                <p class="panel-instruction">
+                    Загрузите артефакт в шлюз. После депозита вы получите случайный артефакт, оставленный другим странником.
+                </p>
+
+                <!-- Drop Zone -->
+                <div class="drop-zone" id="drop-zone">
+                    <div class="drop-zone-content">
+                        <div class="drop-zone-icon">
+                            <svg viewBox="0 0 80 80" class="upload-icon">
+                                <circle cx="40" cy="40" r="35" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="8 4" class="orbit-ring"/>
+                                <path d="M40 20 L40 55 M27 35 L40 20 L53 35" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <p class="drop-zone-text">Перетащите артефакт сюда</p>
+                        <p class="drop-zone-subtext">или нажмите для выбора файла</p>
+                        <p class="drop-zone-limits">Макс. 10 МБ · Без видео · Изображения, тексты, GIF</p>
+                    </div>
+                    <input type="file" id="file-input" class="file-input" accept="image/*,text/*,.pdf,.json,.gif,.zip,.rar,.mp3,.wav,.ogg">
+                </div>
+
+                <!-- Selected file info -->
+                <div class="selected-file" id="selected-file" style="display: none;">
+                    <div class="file-info">
+                        <span class="file-icon">📦</span>
+                        <div class="file-details">
+                            <span class="file-name" id="file-name"></span>
+                            <span class="file-size" id="file-size"></span>
+                        </div>
+                        <button class="file-remove" id="file-remove" title="Убрать">✕</button>
+                    </div>
+                </div>
+
+                <!-- Trade button -->
+                <button class="cargo-btn" id="trade-btn" disabled>
+                    <span class="btn-icon">◈</span>
+                    <span class="btn-text">ИНИЦИИРОВАТЬ ОБМЕН</span>
+                    <span class="btn-loading" style="display: none;">
+                        <span class="spinner"></span> ПЕРЕДАЧА...
+                    </span>
+                </button>
+            </div>
+
+            <!-- PHASE 2: Transformation Animation -->
+            <div class="trade-phase" id="phase-transform" style="display: none;">
+                <div class="transform-container">
+                    <div class="transform-vortex" id="transform-vortex">
+                        <div class="vortex-ring vortex-ring-1"></div>
+                        <div class="vortex-ring vortex-ring-2"></div>
+                        <div class="vortex-ring vortex-ring-3"></div>
+                        <div class="vortex-core"></div>
+                    </div>
+                    <p class="transform-text" id="transform-text">Анализ артефакта...</p>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PHASE 3: Light Burst + Result -->
+            <div class="trade-phase" id="phase-result" style="display: none;">
+                <div class="light-burst" id="light-burst"></div>
+                <div class="particle-field" id="particle-field"></div>
+                <div class="artifact-reveal" id="artifact-reveal">
+                    <div class="artifact-card">
+                        <div class="artifact-glow"></div>
+                        <div class="artifact-preview" id="artifact-preview"></div>
+                        <div class="artifact-info">
+                            <h3 class="artifact-name" id="artifact-name"></h3>
+                            <span class="artifact-size" id="artifact-size"></span>
+                            <span class="artifact-type" id="artifact-type"></span>
+                        </div>
+                        <a class="cargo-btn download-btn" id="download-btn" href="#">
+                            <span class="btn-icon">⬇</span>
+                            <span class="btn-text">ВЫГРУЗИТЬ В ОТСЕК</span>
+                        </a>
+                    </div>
+                    <button class="cargo-btn reset-btn" id="reset-btn">
+                        <span class="btn-icon">↻</span>
+                        <span class="btn-text">НОВЫЙ ОБМЕН</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- PHASE: Empty vault message -->
+            <div class="trade-phase" id="phase-empty" style="display: none;">
+                <div class="empty-vault-msg">
+                    <p class="empty-icon">📡</p>
+                    <p class="empty-text">Артефакт принят в хранилище.</p>
+                    <p class="empty-subtext">Но вы — первый странник. Хранилище пусто. Вернитесь позже, когда другие оставят свой след.</p>
+                    <button class="cargo-btn reset-btn" id="reset-btn-empty">
+                        <span class="btn-icon">↻</span>
+                        <span class="btn-text">ПОВТОРИТЬ</span>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
