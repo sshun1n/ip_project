@@ -8,18 +8,11 @@
 ```bash
 npm install
 node app.js
-# Открыть http://localhost:3000
 ```
 
 ### Docker
 ```bash
 docker compose up -d
-# Открыть http://localhost:3000
-```
-
-Для смены секрета куки на продакшене:
-```bash
-COOKIE_SECRET=ваш-секрет docker compose up -d
 ```
 
 ## Стек технологий
@@ -47,8 +40,6 @@ COOKIE_SECRET=ваш-секрет docker compose up -d
 ├── Dockerfile
 └── docker-compose.yml
 ```
-
-## Тестирование
 
 ```bash
 npx jest --verbose
