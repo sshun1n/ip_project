@@ -3,7 +3,7 @@ const { engine } = require('express-handlebars');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
-const MongoStore = require('connect-mongo');
+const MongoStore = require('connect-mongo').default || require('connect-mongo');
 const path = require('path');
 
 const db = require('./lib/db');
