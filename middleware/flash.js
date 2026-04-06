@@ -1,9 +1,5 @@
-/**
- * Миддлвар для flash-уведомлений через сессию
- * Сохраняет сообщения между запросами и передаёт в шаблоны через res.locals
- */
+// flash notifications middleware
 module.exports = function flash(req, res, next) {
-  // Переносим накопленные сообщения в шаблон и очищаем
   if (req.session.flash && req.session.flash.length > 0) {
     res.locals.flash = req.session.flash;
     req.session.flash = [];

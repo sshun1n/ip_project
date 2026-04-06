@@ -1,16 +1,11 @@
-/**
- * ARTIFACT SWAP — Клиентская логика
- * Загрузка файлов, анимация трансформации, динамическое обновление UI
- */
-
 (function () {
   'use strict';
 
-  // Работаем только на главной странице
+  // только на главной
   const isHomePage = !!document.getElementById('phase-upload');
   if (!isHomePage) return;
 
-  // Элементы DOM
+  // dom
   const dropZone = document.getElementById('drop-zone');
   const fileInput = document.getElementById('file-input');
   const selectedFileEl = document.getElementById('selected-file');
@@ -21,17 +16,17 @@
   const btnText = tradeBtn.querySelector('.btn-text');
   const btnLoading = tradeBtn.querySelector('.btn-loading');
 
-  // Фазы обмена
+  // обмен
   const phaseUpload = document.getElementById('phase-upload');
   const phaseTransform = document.getElementById('phase-transform');
   const phaseResult = document.getElementById('phase-result');
   const phaseEmpty = document.getElementById('phase-empty');
 
-  // Трансформация
+  // трансформация
   const transformText = document.getElementById('transform-text');
   const progressFill = document.getElementById('progress-fill');
 
-  // Результат
+  // результат
   const lightBurst = document.getElementById('light-burst');
   const particleField = document.getElementById('particle-field');
   const artifactPreview = document.getElementById('artifact-preview');
@@ -55,7 +50,7 @@
     return (bytes / Math.pow(1024, i)).toFixed(1) + ' ' + units[i];
   }
 
-  // Человекочитаемый MIME-тип
+  // формат MIME
   function formatMime(mime) {
     const map = {
       'image/jpeg': 'JPEG Изображение', 'image/png': 'PNG Изображение',
@@ -69,7 +64,7 @@
   function isImageMime(mime) { return mime && mime.startsWith('image/'); }
   function isTextMime(mime) { return mime && (mime.startsWith('text/') || mime === 'application/json'); }
 
-  // Flash-уведомление
+  // Flash-уведомления
   function showFlash(type, message) {
     const icons = { signal: '⚡', warning: '⚠', static: '📡' };
     const flash = document.createElement('div');
@@ -132,7 +127,7 @@
   });
   fileRemoveBtn.addEventListener('click', clearFile);
 
-  // Drag & Drop
+  // drag and drop
   dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('drag-over'); });
   dropZone.addEventListener('dragleave', () => { dropZone.classList.remove('drag-over'); });
   dropZone.addEventListener('drop', (e) => {
@@ -213,7 +208,7 @@
       await new Promise(r => setTimeout(r, 800));
 
       if (data.success && data.received) {
-        // Фаза результата: вспышка + частицы + карточка артефакта
+        // Фаза результата: вспышка + частицы + артефакт
         showPhase(phaseResult);
 
         lightBurst.classList.remove('active');
@@ -274,7 +269,7 @@
     artifactSize.textContent = `Размер: ${formatSize(artifact.size)}`;
     artifactType.textContent = `Тип: ${formatMime(artifact.mimeType)}`;
 
-    // Скачивание через серверный роут с правильным Content-Disposition
+    // Скачивание через серверный роут
     downloadBtn.href = `/api/download/${artifact.id}`;
     downloadBtn.removeAttribute('download');
   }
@@ -289,10 +284,10 @@
         inventoryBadge.style.transform = 'scale(1.4)';
         setTimeout(() => { inventoryBadge.style.transform = 'scale(1)'; }, 300);
       }
-    } catch (e) { /* игнорируем */ }
+    } catch (e) { }
   }
 
-  // Кнопки «Новый обмен»
+  // Кнопки Новый обмен
   if (resetBtn) {
     resetBtn.addEventListener('click', () => {
       showPhase(phaseUpload);
@@ -306,7 +301,6 @@
     });
   }
 
-  // Автоскрытие серверных flash-уведомлений
   document.querySelectorAll('.flash-signal[data-flash-id]').forEach((flash) => {
     setTimeout(() => {
       if (flash.parentElement) {

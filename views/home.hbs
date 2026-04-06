@@ -1,8 +1,4 @@
-<!-- ═══════════════════════════════════════════════ -->
-<!-- CENTERED CARGO AIRLOCK                         -->
-<!-- ═══════════════════════════════════════════════ -->
 <section class="airlock-fullscreen">
-    <!-- Background airlock illustration -->
     <div class="airlock-bg-art">
         <img src="/images/airlock-bg.png" alt="" class="airlock-bg-img" aria-hidden="true">
     </div>
@@ -19,13 +15,11 @@
         </div>
 
         <div class="panel-body">
-            <!-- PHASE 1: Upload Zone -->
             <div class="trade-phase" id="phase-upload">
                 <p class="panel-instruction">
                     Загрузите артефакт в шлюз. После депозита вы получите случайный артефакт, оставленный другим странником.
                 </p>
 
-                <!-- Drop Zone -->
                 <div class="drop-zone" id="drop-zone">
                     <div class="drop-zone-content">
                         <div class="drop-zone-icon">
@@ -41,7 +35,6 @@
                     <input type="file" id="file-input" class="file-input" accept="image/*,text/*,.pdf,.json,.gif,.zip,.rar,.mp3,.wav,.ogg">
                 </div>
 
-                <!-- Selected file info -->
                 <div class="selected-file" id="selected-file" style="display: none;">
                     <div class="file-info">
                         <span class="file-icon">📦</span>
@@ -53,7 +46,6 @@
                     </div>
                 </div>
 
-                <!-- Trade button -->
                 <button class="cargo-btn" id="trade-btn" disabled>
                     <span class="btn-icon">◈</span>
                     <span class="btn-text">ИНИЦИИРОВАТЬ ОБМЕН</span>
@@ -63,7 +55,6 @@
                 </button>
             </div>
 
-            <!-- PHASE 2: Transformation Animation -->
             <div class="trade-phase" id="phase-transform" style="display: none;">
                 <div class="transform-container">
                     <div class="transform-vortex" id="transform-vortex">
@@ -79,7 +70,6 @@
                 </div>
             </div>
 
-            <!-- PHASE 3: Light Burst + Result -->
             <div class="trade-phase" id="phase-result" style="display: none;">
                 <div class="light-burst" id="light-burst"></div>
                 <div class="particle-field" id="particle-field"></div>
@@ -104,7 +94,6 @@
                 </div>
             </div>
 
-            <!-- PHASE: Empty vault message -->
             <div class="trade-phase" id="phase-empty" style="display: none;">
                 <div class="empty-vault-msg">
                     <p class="empty-icon">📡</p>

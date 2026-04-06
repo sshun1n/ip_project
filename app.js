@@ -14,7 +14,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const COOKIE_SECRET = process.env.COOKIE_SECRET || 'c0sm1c-v01d-s3cr3t-7g';
 
-// Шаблонизатор Handlebars
+// handlebars
 app.engine('hbs', engine({
   extname: '.hbs',
   defaultLayout: 'main',
@@ -35,7 +35,7 @@ app.engine('hbs', engine({
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'views'));
 
-// Миддлвары
+// middleware
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -53,14 +53,14 @@ app.use(session({
 app.use(flashMiddleware);
 app.use(loadUser);
 
-// Публичные маршруты (без авторизации)
+// public
 app.get('/login', handlers.showLogin);
 app.post('/login', handlers.doLogin);
 app.get('/register', handlers.showRegister);
 app.post('/register', handlers.doRegister);
 app.get('/logout', handlers.logout);
 
-// Защищённые маршруты (требуют авторизацию)
+// protected
 app.get('/', requireAuth, handlers.home);
 app.get('/inventory', requireAuth, handlers.inventoryPage);
 app.post('/api/trade', requireAuth, handlers.trade);
@@ -68,12 +68,12 @@ app.get('/api/inventory', requireAuth, handlers.inventoryApi);
 app.get('/api/download/:id', requireAuth, handlers.download);
 app.get('/api/preview/:id', requireAuth, handlers.preview);
 
-// Обработка 404
+// 404
 app.use((req, res) => {
   res.status(404).redirect('/');
 });
 
-// Обработка ошибок
+// 500
 app.use((err, req, res, next) => {
   console.error('Ошибка на станции:', err);
   res.status(500).json({
@@ -82,17 +82,12 @@ app.use((err, req, res, next) => {
   });
 });
 
-// Загрузка сид-артефактов и запуск сервера
 vault.loadSeeds();
 console.log(`◈ Хранилище загружено: ${vault.stats().total} артефактов от ${vault.stats().uploaders} источников`);
 
 if (require.main === module) {
   app.listen(PORT, () => {
-    console.log(`\n⚡ ═══════════════════════════════════════════════`);
-    console.log(`⚡  ARTIFACT SWAP — СТАНЦИЯ ОБМЕНА`);
-    console.log(`⚡  Сектор 7G · Порт ${PORT}`);
-    console.log(`⚡  http://localhost:${PORT}`);
-    console.log(`⚡ ═══════════════════════════════════════════════\n`);
+    console.log(`http://localhost:${PORT}`);
   });
 }
 

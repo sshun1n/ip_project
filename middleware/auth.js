@@ -1,8 +1,6 @@
 const users = require('../lib/users');
 
-/**
- * Загрузка пользователя из сессии (выполняется на каждом запросе)
- */
+// загрузить пользователя из сессии
 function loadUser(req, res, next) {
   res.locals.user = null;
   res.locals.isAuthenticated = false;
@@ -18,15 +16,13 @@ function loadUser(req, res, next) {
   next();
 }
 
-/**
- * Проверка авторизации — перенаправление на /login если не залогинен
- */
+// проверка авторизации
 function requireAuth(req, res, next) {
   if (!req.session || !req.session.userId) {
     req.session.flash = req.session.flash || [];
     req.session.flash.push({
       type: 'warning',
-      message: '⚠ Идентификация обязательна. Войдите на станцию.',
+      message: 'Идентификация обязательна. Войдите на станцию.',
       id: Date.now()
     });
     return res.redirect('/login');

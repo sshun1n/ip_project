@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
         content="Digital Trade-In: Artifact Swap — анонимная станция обмена космическими артефактами.">
-    <title>⚡ Artifact Swap — Станция Обмена</title>
+    <title>Станция Обмена</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -16,17 +16,14 @@
 </head>
 
 <body>
-    <!-- Star field background -->
     <div class="starfield">
         <div class="stars stars-small"></div>
         <div class="stars stars-medium"></div>
         <div class="stars stars-large"></div>
     </div>
 
-    <!-- Scanline overlay -->
     <div class="scanline-overlay"></div>
 
-    <!-- Header -->
     <header class="station-header">
         <div class="header-content">
             <a href="/" class="station-logo-link">
@@ -57,7 +54,6 @@
         </div>
     </header>
 
-    <!-- Flash messages -->
     {{#if flash.length}}
     <div class="flash-container">
         {{#each flash}}
@@ -74,15 +70,12 @@
     </div>
     {{/if}}
 
-    <!-- Dynamic flash container -->
     <div id="dynamic-flash" class="flash-container"></div>
 
-    <!-- Main content -->
     <main class="station-main">
         {{{body}}}
     </main>
 
-    <!-- Footer -->
     <footer class="station-footer">
         <div class="footer-content">
             <span class="footer-coords">◈ КООРДИНАТЫ: 47.3°N · 122.0°W · ОРБИТА Z-93</span>
