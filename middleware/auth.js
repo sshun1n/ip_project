@@ -1,23 +1,25 @@
 const users = require('../lib/users');
 
-// загрузить пользователя из сессии
-function loadUser(req, res, next) {
+async function loadUser(req, res, next) {
   res.locals.user = null;
   res.locals.isAuthenticated = false;
 
   if (req.session && req.session.userId) {
-    const user = users.getById(req.session.userId);
-    if (user) {
-      res.locals.user = users.sanitize(user);
-      res.locals.isAuthenticated = true;
+    try {
+      const user = await users.getById(req.session.userId);
+      if (user) {
+        res.locals.user = users.sanitize(user);
+        res.locals.isAuthenticated = true;
+      }
+    } catch (err) {
+      console.error('Ошибка загрузки пользователя:', err.message);
     }
   }
 
   next();
 }
 
-// проверка авторизации
-function requireAuth(req, res, next) {
+async function requireAuth(req, res, next) {
   if (!req.session || !req.session.userId) {
     req.session.flash = req.session.flash || [];
     req.session.flash.push({
@@ -28,8 +30,13 @@ function requireAuth(req, res, next) {
     return res.redirect('/login');
   }
 
-  const user = users.getById(req.session.userId);
-  if (!user) {
+  try {
+    const user = await users.getById(req.session.userId);
+    if (!user) {
+      req.session.userId = null;
+      return res.redirect('/login');
+    }
+  } catch (err) {
     req.session.userId = null;
     return res.redirect('/login');
   }

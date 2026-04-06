@@ -1,16 +1,23 @@
 node_modules/
-data/
-public/artifacts/*.jpg
-public/artifacts/*.jpeg
 
+# Загруженные артефакты
+public/artifacts/*
+!public/artifacts/.gitkeep
 
+# Системные файлы
 .DS_Store
 Thumbs.db
 *.log
+
+# IDE
 .vscode/
 .idea/
 *.swp
 *.swo
+
+# Переменные окружения
 .env
 .env.local
+
+# Docker
 docker-compose.override.yml

@@ -1,0 +1,47 @@
+[
+  {
+    "id": "ae9c6e11-1b08-45c2-b2a1-57ad1503d8a3",
+    "username": "Pilot",
+    "passwordHash": "$2b$10$h13kQvYQKDbv/.79guf2ruNYDKdMWyT6O3DCUfC9JDJ/Go6Nfnqey",
+    "inventory": [
+      {
+        "id": "art-1",
+        "name": "file.txt",
+        "url": "/a/1",
+        "size": 100,
+        "mimeType": "text/plain",
+        "receivedAt": "2026-03-29T09:46:08.821Z"
+      }
+    ],
+    "uploadedIds": [],
+    "createdAt": "2026-03-29T09:46:08.821Z"
+  },
+  {
+    "id": "e480b367-ad2f-41c6-840f-498ada9d499c",
+    "username": "sshunin",
+    "passwordHash": "$2b$10$QBMNqZ6pffGmDlhC54Vv6e16CS2DlfUsf0zEIR6JSQn5K4pJXM2Qi",
+    "inventory": [
+      {
+        "id": "1daecabd-fabc-4dfc-ae5d-fa0c1edace3e",
+        "name": "1daecabd-fabc-4dfc-ae5d-fa0c1edace3e.png",
+        "url": "/artifacts/1daecabd-fabc-4dfc-ae5d-fa0c1edace3e.png",
+        "size": 9901942,
+        "mimeType": "image/png",
+        "receivedAt": "2026-03-29T09:47:20.264Z"
+      },
+      {
+        "id": "a9190122-faae-40d0-b7c9-bb157560cba7",
+        "name": "a9190122-faae-40d0-b7c9-bb157560cba7.png",
+        "url": "/artifacts/a9190122-faae-40d0-b7c9-bb157560cba7.png",
+        "size": 10166952,
+        "mimeType": "image/png",
+        "receivedAt": "2026-03-29T09:47:27.511Z"
+      }
+    ],
+    "uploadedIds": [
+      "bb19ac90-a0cc-4e34-94e3-b347623fbc99",
+      "ccb3d538-7192-4155-9875-71a48d2347b4"
+    ],
+    "createdAt": "2026-03-29T09:47:02.929Z"
+  }
+]

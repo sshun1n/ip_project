@@ -1,29 +1,35 @@
 version: "3.8"
 
 services:
+  mongodb:
+    image: mongo:7
+    container_name: artifact-swap-db
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    environment:
+      - MONGO_INITDB_DATABASE=artifact-swap
+
   artifact-swap:
     build: .
     container_name: artifact-swap
     restart: unless-stopped
     ports:
       - "3000:3000"
+    depends_on:
+      - mongodb
     environment:
       - NODE_ENV=production
       - PORT=3000
+      - MONGO_URI=mongodb://mongodb:27017/artifact-swap
       - COOKIE_SECRET=${COOKIE_SECRET:-c0sm1c-pr0d-s3cr3t-7g}
     volumes:
-      # Персистентное хранилище данных пользователей и артефактов
-      - app-data:/app/data
       - app-artifacts:/app/public/artifacts
-    healthcheck:
-      test: ["CMD", "wget", "-q", "--spider", "http://localhost:3000/login"]
-      interval: 30s
-      timeout: 5s
-      retries: 3
-      start_period: 10s
 
 volumes:
-  app-data:
+  mongo-data:
     driver: local
   app-artifacts:
     driver: local

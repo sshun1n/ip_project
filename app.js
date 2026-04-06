@@ -3,8 +3,10 @@ const { engine } = require('express-handlebars');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+const MongoStore = require('connect-mongo');
 const path = require('path');
 
+const db = require('./lib/db');
 const flashMiddleware = require('./middleware/flash');
 const { loadUser, requireAuth } = require('./middleware/auth');
 const handlers = require('./handlers/main');
@@ -44,9 +46,14 @@ app.use(session({
   secret: COOKIE_SECRET,
   resave: false,
   saveUninitialized: false,
+  store: MongoStore.create({
+    mongoUrl: db.MONGO_URI,
+    collectionName: 'sessions',
+    ttl: 7 * 24 * 60 * 60
+  }),
   cookie: {
     signed: true,
-    maxAge: 7 * 24 * 60 * 60 * 1000, // 7 дней
+    maxAge: 7 * 24 * 60 * 60 * 1000,
     httpOnly: true
   }
 }));
@@ -68,26 +75,34 @@ app.get('/api/inventory', requireAuth, handlers.inventoryApi);
 app.get('/api/download/:id', requireAuth, handlers.download);
 app.get('/api/preview/:id', requireAuth, handlers.preview);
 
-// 404
 app.use((req, res) => {
   res.status(404).redirect('/');
 });
 
-// 500
 app.use((err, req, res, next) => {
   console.error('Ошибка на станции:', err);
   res.status(500).json({
     success: false,
-    message: '⚠ Критическая ошибка на станции. Технический отсек уведомлён.'
+    message: 'Критическая ошибка на станции. Технический отсек уведомлён.'
   });
 });
 
-vault.loadSeeds();
-console.log(`◈ Хранилище загружено: ${vault.stats().total} артефактов от ${vault.stats().uploaders} источников`);
+async function start() {
+  await db.connect();
+  await vault.loadSeeds();
+
+  const vaultStats = await vault.stats();
+  console.log(`◈ Хранилище: ${vaultStats.total} артефактов от ${vaultStats.uploaders} источников`);
+
+  app.listen(PORT, () => {
+    console.log(`⚡ ARTIFACT SWAP — http://localhost:${PORT}`);
+  });
+}
 
 if (require.main === module) {
-  app.listen(PORT, () => {
-    console.log(`http://localhost:${PORT}`);
+  start().catch(err => {
+    console.error('Не удалось запустить станцию:', err);
+    process.exit(1);
   });
 }
 
